@@ -9,9 +9,10 @@ private:
     ALLEGRO_BITMAP* sprite;
     float x, y;
     float speed;
+    float scale; // Wspó³czynnik skalowania
 
 public:
-    Player(const char* textureFile, float startX, float startY);
+    Player(const char* textureFile, float startX, float startY, float scale = 1.0f);
     ~Player();
     void move(float dx, float dy);
     void draw();
