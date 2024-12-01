@@ -30,4 +30,15 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\background.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="assets\player.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="assets\zombie.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

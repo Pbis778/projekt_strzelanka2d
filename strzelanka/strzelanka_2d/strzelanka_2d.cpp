@@ -41,12 +41,21 @@ int main() {
     al_register_event_source(eventQueue, al_get_timer_event_source(timer));
     al_register_event_source(eventQueue, al_get_keyboard_event_source());
 
+    // Załaduj tło
+    ALLEGRO_BITMAP* background = al_load_bitmap("resources/background.png");
+    if (!background) {
+        std::cerr << "Failed to load background image!" << std::endl;
+        return -1;
+    }
+
     Player player("resources/player.png", 400, 500);
 
     bool running = true;
     bool redraw = true;
 
     al_start_timer(timer);
+
+    ALLEGRO_KEYBOARD_STATE keyState;
 
     while (running) {
         ALLEGRO_EVENT event;
@@ -55,10 +64,13 @@ int main() {
         if (event.type == ALLEGRO_EVENT_TIMER) {
             redraw = true;
 
-            if (al_key_down(&event.keyboard, ALLEGRO_KEY_W)) player.move(0, -1);
-            if (al_key_down(&event.keyboard, ALLEGRO_KEY_S)) player.move(0, 1);
-            if (al_key_down(&event.keyboard, ALLEGRO_KEY_A)) player.move(-1, 0);
-            if (al_key_down(&event.keyboard, ALLEGRO_KEY_D)) player.move(1, 0);
+            // Pobranie stanu klawiatury
+            al_get_keyboard_state(&keyState);
+
+            if (al_key_down(&keyState, ALLEGRO_KEY_W)) player.move(0, -1);
+            if (al_key_down(&keyState, ALLEGRO_KEY_S)) player.move(0, 1);
+            if (al_key_down(&keyState, ALLEGRO_KEY_A)) player.move(-1, 0);
+            if (al_key_down(&keyState, ALLEGRO_KEY_D)) player.move(1, 0);
         }
         else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
             running = false;
@@ -67,12 +79,18 @@ int main() {
         if (redraw && al_is_event_queue_empty(eventQueue)) {
             redraw = false;
 
-            al_clear_to_color(al_map_rgb(0, 0, 0));
+            // Rysowanie tła
+            al_draw_bitmap(background, 0, 0, 0);
+
+            // Rysowanie gracza
             player.draw();
+
             al_flip_display();
         }
     }
 
+    // Zwalnianie zasobów
+    al_destroy_bitmap(background);
     al_destroy_timer(timer);
     al_destroy_event_queue(eventQueue);
     al_destroy_display(display);
