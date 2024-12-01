@@ -14,8 +14,18 @@ Player::~Player() {
 }
 
 void Player::move(float dx, float dy) {
-    x += dx * speed;
-    y += dy * speed;
+    float newX = x + dx * speed;
+    float newY = y + dy * speed;
+
+    float spriteWidth = al_get_bitmap_width(sprite) * scale;
+    float spriteHeight = al_get_bitmap_height(sprite) * scale;
+
+    if (newX >= 0 && newX + spriteWidth <= 1800) {
+        x = newX;
+    }
+    if (newY >= 0 && newY + spriteHeight <= 900) {
+        y = newY;
+    }
 }
 
 void Player::draw() {

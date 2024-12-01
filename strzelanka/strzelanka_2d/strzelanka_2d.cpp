@@ -2,7 +2,10 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 #include <iostream>
+#include <vector>
+#include <random>
 #include "Player.h"
+#include "Enemy.h"
 
 const int SCREEN_WIDTH = 1800;
 const int SCREEN_HEIGHT = 900;
@@ -34,7 +37,7 @@ int main() {
         return -1;
     }
 
-    Player player("assets/player.png", 400, 500, 0.2); // Skalowanie gracza na 50% oryginalnego rozmiaru
+    Player player("assets/player.png", 400, 500, 0.2); 
     bool running = true, redraw = true;
 
     al_start_timer(timer);
