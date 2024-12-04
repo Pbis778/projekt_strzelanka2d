@@ -2,23 +2,26 @@
 #define PLAYER_H
 
 #include <allegro5/allegro.h>
-#include <allegro5/allegro_image.h>
 
 class Player {
-private:
-    ALLEGRO_BITMAP* sprite;
-    float x, y;
-    float speed;
-    float scale; // Wspó³czynnik skalowania
-
 public:
-    Player(const char* textureFile, float startX, float startY, float scale = 1.0f);
+    Player(const char* filePath, float x, float y, float scale);
     ~Player();
+
     void move(float dx, float dy);
-    void draw();
+    void draw() const;
+
+    // Deklaracje getterów
     float getX() const;
     float getY() const;
-    ALLEGRO_BITMAP* getBitmap() const;
+    float getWidth() const;
+    float getHeight() const;
+
+private:
+    float x, y;
+    float width, height;
+    float scale;
+    ALLEGRO_BITMAP* sprite;
 };
 
 #endif // PLAYER_H

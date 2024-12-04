@@ -141,12 +141,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Zombie.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="strzelanka_2d.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Zombie.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
