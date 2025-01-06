@@ -16,7 +16,8 @@ public:
 
     float getX() const { return x; }
     float getY() const { return y; }
-
+    float getWidth() const { return width; }
+    float getHeight() const { return height; }
 private:
     float x, y;
     float scale;

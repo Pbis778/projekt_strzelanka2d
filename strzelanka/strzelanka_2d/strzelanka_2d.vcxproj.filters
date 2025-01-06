@@ -24,12 +24,18 @@
     <ClCompile Include="Zombie.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Attack.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Zombie.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Attack.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,6 +50,9 @@
       <Filter>Pliki zasobów</Filter>
     </Image>
     <Image Include="assets\zombie.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="assets\bullet.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>

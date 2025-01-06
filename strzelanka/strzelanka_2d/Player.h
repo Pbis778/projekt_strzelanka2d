@@ -10,8 +10,8 @@ public:
 
     void move(float dx, float dy);
     void draw() const;
+    void reset(const char* filePath, float x, float y, float scale);
 
-    // Deklaracje getterów
     float getX() const;
     float getY() const;
     float getWidth() const;
@@ -24,4 +24,4 @@ private:
     ALLEGRO_BITMAP* sprite;
 };
 
-#endif // PLAYER_H
+#endif

@@ -19,17 +19,17 @@ Player::~Player() {
 }
 
 void Player::move(float dx, float dy) {
-    x += dx * 5.0f; // Prêdkoœæ gracza
+    x += dx * 5.0f;
     y += dy * 5.0f;
 
-    // Ograniczenie ruchu do ekranu
     if (x < 0) x = 0;
     if (y < 0) y = 0;
-    if (x + width > 1800) x = 1800 - width; // 1800 to SCREEN_WIDTH
-    if (y + height > 900) y = 900 - height; // 900 to SCREEN_HEIGHT
+    if (x + width > 1800) x = 1800 - width;
+    if (y + height > 900) y = 900 - height;
 }
 
-void Player::draw() const {
+void Player::draw() const
+{
     if (sprite) {
         al_draw_scaled_bitmap(sprite, 0, 0,
             al_get_bitmap_width(sprite), al_get_bitmap_height(sprite),
@@ -37,7 +37,25 @@ void Player::draw() const {
     }
 }
 
-// Implementacja getterów z deklaracjami w nag³ówku
+void Player::reset(const char* filePath, float x, float y, float scale) {
+    if (sprite) {
+        al_destroy_bitmap(sprite);
+        sprite = nullptr;
+    }
+
+    this->x = x;
+    this->y = y;
+    this->scale = scale;
+
+    sprite = al_load_bitmap(filePath);
+    if (!sprite) {
+        return;
+    }
+    width = al_get_bitmap_width(sprite) * scale;
+    height = al_get_bitmap_height(sprite) * scale;
+}
+
+
 float Player::getX() const { return x; }
 float Player::getY() const { return y; }
 float Player::getWidth() const { return width; }
