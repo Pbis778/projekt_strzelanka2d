@@ -6,7 +6,7 @@
 
 class Attack {
 public:
-    Attack(const char* filePath, float x, float y, float speed);
+    Attack(const char* filePath, float x, float y, float speed, float scale);
     ~Attack();
 
     void move();
@@ -20,6 +20,7 @@ public:
 private:
     float x, y;
     float speed;
+    float scale;
     float width, height;
     ALLEGRO_BITMAP* sprite;
 };

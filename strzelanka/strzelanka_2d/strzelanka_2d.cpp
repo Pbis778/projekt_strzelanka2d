@@ -1,4 +1,6 @@
 ﻿#include <allegro5/allegro.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_font.h>
@@ -23,6 +25,13 @@ int main() {
     al_init_image_addon();
     al_init_font_addon();
     al_install_keyboard();
+    al_install_audio();
+    al_init_acodec_addon();
+
+    if (!al_reserve_samples(10)) {
+        std::cerr << "Failed to reserve samples!" << std::endl;
+        return -1;
+    }
 
     ALLEGRO_DISPLAY* display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
     if (!display) {
@@ -37,7 +46,6 @@ int main() {
     al_register_event_source(eventQueue, al_get_timer_event_source(timer));
     al_register_event_source(eventQueue, al_get_keyboard_event_source());
 
-    // Wbudowana czcionka
     ALLEGRO_FONT* font = al_create_builtin_font();
     if (!font) {
         std::cerr << "Failed to create builtin font!" << std::endl;
@@ -50,7 +58,20 @@ int main() {
         return -1;
     }
 
-    Player player("assets/player.png", 400, 500, 0.2);
+    ALLEGRO_SAMPLE* backgroundMusic = al_load_sample("assets/background.wav");
+    if (!backgroundMusic) {
+        std::cerr << "Failed to load background music!" << std::endl;
+        return -1;
+    }
+    ALLEGRO_SAMPLE* akShotSound = al_load_sample("assets/ak_shot_sound.wav");
+    if (!akShotSound) {
+        std::cerr << "Failed to load Ak Shot sound!" << std::endl;
+        return -1;
+    }
+
+    al_play_sample(backgroundMusic, 0.05, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, nullptr);
+
+    Player player("assets/player.png", 400, 500, 0.15);
     std::vector<std::unique_ptr<Zombie>> enemies;
 
     bool running = true, redraw = true, gameStarted = false, gameOver = false;
@@ -71,7 +92,7 @@ int main() {
 
                 for (auto it = bullets.begin(); it != bullets.end();) {
                     if ((*it)->isOutOfBounds()) {
-                        it = bullets.erase(it); // Usuń pocisk, który wyszedł poza ekran
+                        it = bullets.erase(it);
                     }
                     else {
                         (*it)->move();
@@ -85,12 +106,11 @@ int main() {
 
                     for (auto zombieIt = enemies.begin(); zombieIt != enemies.end();) {
                         if ((*bulletIt)->collidesWith(**zombieIt)) {
-                            // Usuwamy zombie i pocisk po kolizji
                             zombieIt = enemies.erase(zombieIt);
                             bulletIt = bullets.erase(bulletIt);
-                            killCount++; // Zwiększamy liczbę zabitych zombie
+                            killCount++;
                             bulletRemoved = true;
-                            break; // Pocisk już usunięty, więc wychodzimy z wewnętrznej pętli
+                            break;
                         }
                         else {
                             ++zombieIt;
@@ -102,11 +122,9 @@ int main() {
                     }
                 }
 
-                // Liczenie czasu przetrwania i punktów
                 timeSurvived += 1.0 / 60.0;
                 points = static_cast<int>(timeSurvived) + killCount * 10;
 
-                // Pobranie stanu klawiatury
                 ALLEGRO_KEYBOARD_STATE keyState;
                 al_get_keyboard_state(&keyState);
 
@@ -115,15 +133,13 @@ int main() {
                 if (al_key_down(&keyState, ALLEGRO_KEY_A)) player.move(-1, 0);
                 if (al_key_down(&keyState, ALLEGRO_KEY_D)) player.move(1, 0);
 
-                // Dodawanie nowych zombie co pewien czas
                 static int frameCount = 0;
                 frameCount++;
-                if (frameCount % 120 == 0) { // Co 2 sekundy
+                if (frameCount % 120 == 0) {
                     float startY = rand() % SCREEN_HEIGHT;
                     enemies.push_back(std::make_unique<Zombie>("assets/zombie.png", static_cast<float>(SCREEN_WIDTH), static_cast<float>(startY), 0.3f));
                 }
 
-                // Aktualizacja pozycji zombie
                 for (auto& enemy : enemies) {
                     float dx = player.getX() - enemy->getX();
                     float dy = player.getY() - enemy->getY();
@@ -133,7 +149,6 @@ int main() {
                     enemy->move(dx, dy);
                 }
 
-                // Sprawdzanie kolizji
                 for (const auto& enemy : enemies) {
                     if (enemy->collidesWith(player)) {
                         gameOver = true;
@@ -142,7 +157,6 @@ int main() {
                 }
             }
         }
-
         else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
             running = false;
         }
@@ -158,20 +172,19 @@ int main() {
                 timeSurvived = 0;
 
                 enemies.clear();
-
-                player.reset("assets/player.png", 400, 500, 0.2);
+                player.reset("assets/player.png", 400, 500, 0.15);
                 gameStarted = true;
             }
 
             if (event.keyboard.keycode == ALLEGRO_KEY_L) {
-                bullets.push_back(std::make_unique<Attack>("assets/bullet.png", player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 10.0f));
+                al_play_sample(akShotSound, 0.3, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
+                bullets.push_back(std::make_unique<Attack>("assets/bullet.png", player.getX() + player.getWidth(), (player.getY() + player.getHeight() / 2) - 32, 10.0f, 0.3));
             }
         }
 
         if (redraw && al_is_event_queue_empty(eventQueue)) {
             redraw = false;
 
-            // Ekran startowy
             if (!gameStarted) {
                 al_clear_to_color(al_map_rgb(0, 0, 0));
                 al_draw_text(font, al_map_rgb(255, 255, 255), SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 50,
@@ -182,7 +195,6 @@ int main() {
                 continue;
             }
 
-            // Ekran końcowy
             if (gameOver) {
                 al_clear_to_color(al_map_rgb(0, 0, 0));
                 al_draw_text(font, al_map_rgb(255, 0, 0), SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 100,
@@ -195,7 +207,6 @@ int main() {
                 continue;
             }
 
-            // Gra
             al_draw_scaled_bitmap(background, 0, 0,
                 al_get_bitmap_width(background), al_get_bitmap_height(background),
                 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
@@ -207,7 +218,7 @@ int main() {
             }
 
             for (const auto& bullet : bullets) {
-                bullet->draw();  // Rysowanie pocisków
+                bullet->draw();
             }
 
             al_draw_textf(font, al_map_rgb(255, 255, 255), 10, 10, 0, "Points: %d", points);
@@ -216,6 +227,7 @@ int main() {
         }
     }
 
+    al_destroy_sample(backgroundMusic);
     al_destroy_bitmap(background);
     al_destroy_font(font);
     al_destroy_display(display);

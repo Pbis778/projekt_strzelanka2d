@@ -3,15 +3,15 @@
 #include <cmath>
 #include <iostream>
 
-Attack::Attack(const char* filePath, float x, float y, float speed)
-    : x(x), y(y), speed(speed), sprite(nullptr), width(0), height(0) {
+Attack::Attack(const char* filePath, float x, float y, float speed, float scale)
+    : x(x), y(y), speed(speed), sprite(nullptr),scale(scale) {
     sprite = al_load_bitmap(filePath);
     if (!sprite) {
         std::cerr << "Failed to load bullet sprite: " << filePath << std::endl;
     }
     else {
-        width = al_get_bitmap_width(sprite);
-        height = al_get_bitmap_height(sprite);
+        width = al_get_bitmap_width(sprite) * scale;
+        height = al_get_bitmap_height(sprite) * scale;
     }
 }
 
@@ -28,7 +28,9 @@ void Attack::move() {
 
 void Attack::draw() const {
     if (sprite) {
-        al_draw_bitmap(sprite, x, y, 0);
+        al_draw_scaled_bitmap(sprite, 0, 0,
+            al_get_bitmap_width(sprite), al_get_bitmap_height(sprite),
+            x, y, width, height, 0);
     }
     else {
         std::cerr << "Attempted to draw a bullet without a valid sprite." << std::endl;
