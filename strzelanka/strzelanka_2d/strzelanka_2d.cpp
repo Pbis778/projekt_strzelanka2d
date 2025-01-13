@@ -10,7 +10,7 @@
 #include "Zombie.h"
 #include "Attack.h"
 
-std::vector<Attack> bullets;
+std::vector<std::unique_ptr<Attack>> bullets;
 
 const int SCREEN_WIDTH = 1800;
 const int SCREEN_HEIGHT = 900;
@@ -69,46 +69,39 @@ int main() {
             if (gameStarted && !gameOver) {
                 redraw = true;
 
-                for (auto it = bullets.begin(); it != bullets.end(); ) {
-                    bool hit = false;
-
-                    // Przechowujemy zombie do usunięcia
-                    std::vector<std::unique_ptr<Zombie>> zombiesToRemove;
-
-                    // Iteracja po wszystkich przeciwnikach
-                    for (auto& enemy : enemies) {
-                        if (it->collidesWith(*enemy)) {
-                            // Zniszczenie zombie i pocisku
-                            killCount++;
-                            points += 10;
-
-                            it = bullets.erase(it); // Usuwamy pocisk
-
-                            zombiesToRemove.push_back(std::move(enemy)); // Przechowujemy zombie do usunięcia
-                            hit = true;
-                            break;  // Jeśli trafił, przerywamy wewnętrzną pętlę
-                        }
+                for (auto it = bullets.begin(); it != bullets.end();) {
+                    if ((*it)->isOutOfBounds()) {
+                        it = bullets.erase(it); // Usuń pocisk, który wyszedł poza ekran
                     }
-
-                    // Usuwamy zombie po zakończeniu pętli
-                    for (auto& zombie : zombiesToRemove) {
-                        // Nie musimy nic więcej robić, bo `std::unique_ptr` sam zadba o zwolnienie pamięci
-                        // Usuwamy zombie z wektora
-                        enemies.erase(std::remove_if(enemies.begin(), enemies.end(),
-                            [&zombie](const std::unique_ptr<Zombie>& enemy) { return enemy.get() == zombie.get(); }), enemies.end());
-                    }
-
-                    if (!hit) {
-                        // Jeśli nie trafiono, poruszamy pocisk
-                        it->move();
-                        if (it->isOutOfBounds()) {
-                            it = bullets.erase(it); // Usuwamy pocisk, który wyszedł poza ekran
-                        }
-                        else {
-                            ++it; // Przechodzimy do następnego pocisku
-                        }
+                    else {
+                        (*it)->move();
+                        (*it)->draw();
+                        ++it;
                     }
                 }
+
+                for (auto bulletIt = bullets.begin(); bulletIt != bullets.end();) {
+                    bool bulletRemoved = false;
+
+                    for (auto zombieIt = enemies.begin(); zombieIt != enemies.end();) {
+                        if ((*bulletIt)->collidesWith(**zombieIt)) {
+                            // Usuwamy zombie i pocisk po kolizji
+                            zombieIt = enemies.erase(zombieIt);
+                            bulletIt = bullets.erase(bulletIt);
+                            killCount++; // Zwiększamy liczbę zabitych zombie
+                            bulletRemoved = true;
+                            break; // Pocisk już usunięty, więc wychodzimy z wewnętrznej pętli
+                        }
+                        else {
+                            ++zombieIt;
+                        }
+                    }
+
+                    if (!bulletRemoved) {
+                        ++bulletIt;
+                    }
+                }
+
                 // Liczenie czasu przetrwania i punktów
                 timeSurvived += 1.0 / 60.0;
                 points = static_cast<int>(timeSurvived) + killCount * 10;
@@ -171,7 +164,7 @@ int main() {
             }
 
             if (event.keyboard.keycode == ALLEGRO_KEY_L) {
-                bullets.push_back(Attack("assets/bullet.png", player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 10.0f));
+                bullets.push_back(std::make_unique<Attack>("assets/bullet.png", player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 10.0f));
             }
         }
 
@@ -214,7 +207,7 @@ int main() {
             }
 
             for (const auto& bullet : bullets) {
-                bullet.draw();  // Rysowanie pocisków
+                bullet->draw();  // Rysowanie pocisków
             }
 
             al_draw_textf(font, al_map_rgb(255, 255, 255), 10, 10, 0, "Points: %d", points);

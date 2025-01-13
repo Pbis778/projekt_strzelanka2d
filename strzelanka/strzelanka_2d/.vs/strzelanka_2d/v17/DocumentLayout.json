@@ -1,29 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\",
+  "WorkspaceRootPath": "C:\\Users\\pbist\\OneDrive\\Dokumenty\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\strzelanka_2d.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|C:\\Users\\pbist\\OneDrive\\Dokumenty\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\strzelanka_2d.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|solutionrelative:strzelanka_2d.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|C:\\PROGRAM FILES\\MICROSOFT VISUAL STUDIO\\2022\\COMMUNITY\\VC\\TOOLS\\MSVC\\14.39.33519\\INCLUDE\\VECTOR||{3B902123-F8A7-4915-9F01-361F908088D0}|"
+      "AbsoluteMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|C:\\Users\\pbist\\OneDrive\\Dokumenty\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Attack.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|solutionrelative:Attack.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Enemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|solutionrelative:Enemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Enemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|solutionrelative:Enemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|solutionrelative:Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|solutionrelative:Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|C:\\Users\\pbist\\OneDrive\\Dokumenty\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Attack.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{24B0C709-327A-46D4-83CC-B5B75E1832F7}|strzelanka_2d.vcxproj|solutionrelative:Attack.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,82 +22,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "vector",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\vector",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\vector",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\vector",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\vector",
-              "ViewState": "AQIAAC0DAAAAAAAAAAAswEIDAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-12-01T18:57:25.445Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Enemy.h",
-              "DocumentMoniker": "C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Enemy.h",
-              "RelativeDocumentMoniker": "Enemy.h",
-              "ToolTip": "C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Enemy.h",
-              "RelativeToolTip": "Enemy.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAARAAAA",
+              "Title": "Attack.h",
+              "DocumentMoniker": "C:\\Users\\pbist\\OneDrive\\Dokumenty\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Attack.h",
+              "RelativeDocumentMoniker": "Attack.h",
+              "ToolTip": "C:\\Users\\pbist\\OneDrive\\Dokumenty\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Attack.h",
+              "RelativeToolTip": "Attack.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-01T18:43:24.289Z",
+              "WhenOpened": "2025-01-13T16:44:21.219Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Player.h",
-              "DocumentMoniker": "C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Player.h",
-              "RelativeDocumentMoniker": "Player.h",
-              "ToolTip": "C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Player.h",
-              "RelativeToolTip": "Player.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-01T18:43:23.711Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Enemy.cpp",
-              "DocumentMoniker": "C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Enemy.cpp",
-              "RelativeDocumentMoniker": "Enemy.cpp",
-              "ToolTip": "C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Enemy.cpp",
-              "RelativeToolTip": "Enemy.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAaAAAA",
+              "DocumentIndex": 1,
+              "Title": "Attack.cpp",
+              "DocumentMoniker": "C:\\Users\\pbist\\OneDrive\\Dokumenty\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Attack.cpp",
+              "RelativeDocumentMoniker": "Attack.cpp",
+              "ToolTip": "C:\\Users\\pbist\\OneDrive\\Dokumenty\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Attack.cpp",
+              "RelativeToolTip": "Attack.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-01T18:43:22.743Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Player.cpp",
-              "DocumentMoniker": "C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Player.cpp",
-              "RelativeDocumentMoniker": "Player.cpp",
-              "ToolTip": "C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\Player.cpp",
-              "RelativeToolTip": "Player.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-01T18:43:21.907Z",
+              "WhenOpened": "2025-01-13T16:27:09.443Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "strzelanka_2d.cpp",
-              "DocumentMoniker": "C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\strzelanka_2d.cpp",
+              "DocumentMoniker": "C:\\Users\\pbist\\OneDrive\\Dokumenty\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\strzelanka_2d.cpp",
               "RelativeDocumentMoniker": "strzelanka_2d.cpp",
-              "ToolTip": "C:\\Users\\macie\\Documents\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\strzelanka_2d.cpp",
+              "ToolTip": "C:\\Users\\pbist\\OneDrive\\Dokumenty\\GitHub\\projekt_strzelanka2d\\strzelanka\\strzelanka_2d\\strzelanka_2d.cpp",
               "RelativeToolTip": "strzelanka_2d.cpp",
-              "ViewState": "AQIAAC8AAAAAAAAAAAAAADoAAABJAAAA",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAUwE4AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-01T18:42:48.963Z",
               "EditorCaption": ""

@@ -4,10 +4,9 @@
 #include <allegro5/allegro.h>
 #include "Zombie.h"
 
-
 class Attack {
 public:
-    Attack(const char* filePath,float x, float y, float speed);
+    Attack(const char* filePath, float x, float y, float speed);
     ~Attack();
 
     void move();
@@ -25,5 +24,4 @@ private:
     ALLEGRO_BITMAP* sprite;
 };
 
-#endif // !ATTACK_H
-
+#endif
