@@ -27,6 +27,9 @@
     <ClCompile Include="Attack.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Ammo.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -38,9 +41,15 @@
     <ClInclude Include="Attack.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="Ammo.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="assets\ammo_pickup_sound.flac">
+      <Filter>Pliki zasobów</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\background.png">
@@ -64,12 +73,18 @@
     <Image Include="assets\TwoOfThreeHealthBar.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="assets\ammopack.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\background.wav">
       <Filter>Pliki zasobów</Filter>
     </Media>
     <Media Include="assets\ak_shot_sound.wav">
+      <Filter>Pliki zasobów</Filter>
+    </Media>
+    <Media Include="assets\ak47_reload_sound.wav">
       <Filter>Pliki zasobów</Filter>
     </Media>
   </ItemGroup>

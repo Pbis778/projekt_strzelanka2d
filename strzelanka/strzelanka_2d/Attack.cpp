@@ -23,7 +23,7 @@ Attack::~Attack() {
 }
 
 void Attack::move() {
-    x += speed; // Pocisk porusza siê w prawo
+    x += speed;
 }
 
 void Attack::draw() const {
@@ -38,7 +38,7 @@ void Attack::draw() const {
 }
 
 bool Attack::isOutOfBounds() const {
-    return x > 1800; // Za granic¹ ekranu
+    return x > 1800;
 }
 
 bool Attack::collidesWith(const Zombie& zombie) const {
@@ -47,6 +47,5 @@ bool Attack::collidesWith(const Zombie& zombie) const {
     float zw = zombie.getWidth();
     float zh = zombie.getHeight();
 
-    // Sprawdzenie, czy prostok¹ty siê nak³adaj¹
     return !(x + width < zx || x > zx + zw || y + height < zy || y > zy + zh);
 }

@@ -17,7 +17,7 @@ public:
     float getWidth() const;
     float getHeight() const;
     unsigned int getAmmunition() const;
-    void setAmuuntion(unsigned int _ammunition);
+    void setAmmunition(unsigned int _ammunition);
     unsigned int getAmmoInMag() const;
     void setAmmoInMag(unsigned int _ammoInMag);
     bool isMagazineEmpty() const;

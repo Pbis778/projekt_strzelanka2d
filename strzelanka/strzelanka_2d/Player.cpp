@@ -93,6 +93,6 @@ float Player::getY() const { return y; }
 float Player::getWidth() const { return width; }
 float Player::getHeight() const { return height; }
 unsigned int Player::getAmmunition() const { return ammunition; }
-void Player::setAmuuntion(unsigned int _ammunition) { ammunition = _ammunition; }
+void Player::setAmmunition(unsigned int _ammunition) { ammunition = _ammunition; }
 unsigned int Player::getAmmoInMag() const { return ammoInMag; }
 void Player::setAmmoInMag(unsigned int _ammoInMag) { ammoInMag = _ammoInMag; }

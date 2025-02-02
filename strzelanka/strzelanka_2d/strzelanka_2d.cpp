@@ -11,8 +11,10 @@
 #include "Player.h"
 #include "Zombie.h"
 #include "Attack.h"
+#include "Ammo.h"
 
 std::vector<std::unique_ptr<Attack>> bullets;
+std::vector<std::unique_ptr<Ammo>> ammoPacks;
 
 const int SCREEN_WIDTH = 1800;
 const int SCREEN_HEIGHT = 900;
@@ -77,6 +79,16 @@ int main() {
         std::cerr << "Failed to load Ak Shot sound!" << std::endl;
         return -1;
     }
+    ALLEGRO_SAMPLE* akReloadSound = al_load_sample("assets/ak47_reload_sound.wav");
+    if (!akReloadSound) {
+        std::cerr << "Failed to load Ak Reload sound!" << std::endl;
+        return -1;
+    }
+    ALLEGRO_SAMPLE* ammoPickupSound = al_load_sample("assets/ammo_pickup_sound.flac");
+    if (!ammoPickupSound) {
+        std::cerr << "Failed to load Ammo Pickup sound!" << std::endl;
+        return -1;
+    }
 
     al_play_sample(backgroundMusic, 0.05, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, nullptr);
 
@@ -88,6 +100,7 @@ int main() {
     int killCount = 0;
 
     float timeSurvived = 0;
+    float ammoSpawnTimer = 0.0f;
 
     al_start_timer(timer);
 
@@ -98,6 +111,17 @@ int main() {
         if (event.type == ALLEGRO_EVENT_TIMER) {
             if (gameStarted && !gameOver) {
                 redraw = true;
+
+                ammoSpawnTimer += 1.0f / 60.0f;
+
+                if (ammoSpawnTimer >= 15.0f) {
+                    ammoSpawnTimer = 0.0f;
+
+                    float ammoX = 0.0f;
+                    float ammoY = static_cast<float>(rand() % (SCREEN_HEIGHT - 50));
+
+                    ammoPacks.push_back(std::make_unique<Ammo>("assets/ammopack.png", ammoX, ammoY, 0.2f));
+                }
 
                 for (auto it = bullets.begin(); it != bullets.end();) {
                     if ((*it)->isOutOfBounds()) {
@@ -133,6 +157,18 @@ int main() {
                         ++bulletIt;
                     }
                 }
+
+                for (auto it = ammoPacks.begin(); it != ammoPacks.end();) {
+                    if ((*it)->collidesWith(player)) {
+                        player.setAmmunition(player.getAmmunition() + 30);
+                        it = ammoPacks.erase(it);
+                        al_play_sample(ammoPickupSound, 0.3, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
+                    }
+                    else {
+                        ++it;
+                    }
+                }
+
 
                 timeSurvived += 1.0 / 60.0;
                 points = static_cast<int>(timeSurvived) + killCount * 10;
@@ -183,7 +219,7 @@ int main() {
                 enemies.clear();
                 player.reset("assets/player.png", 400, 500, 0.15);
                 player.setAmmoInMag(30);
-                player.setAmuuntion(60);
+                player.setAmmunition(60);
                 gameStarted = true;
             }
 
@@ -196,6 +232,7 @@ int main() {
 
             if (event.keyboard.keycode == ALLEGRO_KEY_R) {
                 player.reload();
+                al_play_sample(akReloadSound, 0.3, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
             }
         }
 
@@ -236,6 +273,10 @@ int main() {
 
             for (const auto& bullet : bullets) {
                 bullet->draw();
+            }
+
+            for (const auto& ammoPack : ammoPacks) {
+                ammoPack->draw();
             }
 
             al_draw_textf(font, al_map_rgb(255, 255, 255), 10, 10, 0, "Points: %d", points);
