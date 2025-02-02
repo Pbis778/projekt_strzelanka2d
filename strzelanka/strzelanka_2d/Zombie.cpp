@@ -4,7 +4,7 @@
 #include <iostream>
 
 Zombie::Zombie(const char* filePath, float x, float y, float scale)
-    : x(x), y(y), scale(scale) {
+    : x(x), y(y), scale(scale), health(3) {
     sprite = al_load_bitmap(filePath);
     if (!sprite) {
         std::cerr << "Failed to load zombie sprite: " << filePath << std::endl;
@@ -20,7 +20,7 @@ Zombie::~Zombie() {
 }
 
 void Zombie::move(float dx, float dy) {
-    x += dx * 2.0f; // Prêdkoœæ zombie
+    x += dx * 2.0f;
     y += dy * 2.0f;
 }
 
@@ -30,6 +30,17 @@ void Zombie::draw() const {
             al_get_bitmap_width(sprite), al_get_bitmap_height(sprite),
             x, y, width, height, 0);
     }
+}
+
+void Zombie::takeDamage(int damage) {
+    health -= damage;
+    if (health < 0) {
+        health = 0;
+    }
+}
+
+bool Zombie::isDead() const {
+    return health <= 0;
 }
 
 bool Zombie::collidesWith(const Player& player) const {

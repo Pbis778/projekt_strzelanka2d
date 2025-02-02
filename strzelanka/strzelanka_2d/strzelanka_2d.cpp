@@ -17,6 +17,15 @@ std::vector<std::unique_ptr<Attack>> bullets;
 const int SCREEN_WIDTH = 1800;
 const int SCREEN_HEIGHT = 900;
 
+void clearAfterGameEnd(ALLEGRO_SAMPLE* backgroundMusic, ALLEGRO_BITMAP* background, ALLEGRO_FONT* font, ALLEGRO_DISPLAY* display, ALLEGRO_TIMER* timer, ALLEGRO_EVENT_QUEUE* eventQueue) {
+    al_destroy_sample(backgroundMusic);
+    al_destroy_bitmap(background);
+    al_destroy_font(font);
+    al_destroy_display(display);
+    al_destroy_timer(timer);
+    al_destroy_event_queue(eventQueue);
+};
+
 int main() {
     if (!al_init()) {
         std::cerr << "Failed to initialize Allegro!" << std::endl;
@@ -106,9 +115,12 @@ int main() {
 
                     for (auto zombieIt = enemies.begin(); zombieIt != enemies.end();) {
                         if ((*bulletIt)->collidesWith(**zombieIt)) {
-                            zombieIt = enemies.erase(zombieIt);
+                            (*zombieIt)->takeDamage(1);
+                            if ((*zombieIt)->isDead()) {
+                                zombieIt = enemies.erase(zombieIt);
+                                killCount++;
+                            }
                             bulletIt = bullets.erase(bulletIt);
-                            killCount++;
                             bulletRemoved = true;
                             break;
                         }
@@ -128,10 +140,7 @@ int main() {
                 ALLEGRO_KEYBOARD_STATE keyState;
                 al_get_keyboard_state(&keyState);
 
-                if (al_key_down(&keyState, ALLEGRO_KEY_W)) player.move(0, -1);
-                if (al_key_down(&keyState, ALLEGRO_KEY_S)) player.move(0, 1);
-                if (al_key_down(&keyState, ALLEGRO_KEY_A)) player.move(-1, 0);
-                if (al_key_down(&keyState, ALLEGRO_KEY_D)) player.move(1, 0);
+                player.handlePlayerMovement(keyState, player);
 
                 static int frameCount = 0;
                 frameCount++;
@@ -173,12 +182,20 @@ int main() {
 
                 enemies.clear();
                 player.reset("assets/player.png", 400, 500, 0.15);
+                player.setAmmoInMag(30);
+                player.setAmuuntion(60);
                 gameStarted = true;
             }
 
             if (event.keyboard.keycode == ALLEGRO_KEY_L) {
-                al_play_sample(akShotSound, 0.3, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
-                bullets.push_back(std::make_unique<Attack>("assets/bullet.png", player.getX() + player.getWidth(), (player.getY() + player.getHeight() / 2) - 32, 10.0f, 0.3));
+                if (player.shoot()) {
+                    al_play_sample(akShotSound, 0.3, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
+                    bullets.push_back(std::make_unique<Attack>("assets/bullet.png", player.getX() + player.getWidth(), (player.getY() + player.getHeight() / 2) - 32, 10.0f, 0.3));
+                }
+            }
+
+            if (event.keyboard.keycode == ALLEGRO_KEY_R) {
+                player.reload();
             }
         }
 
@@ -222,17 +239,13 @@ int main() {
             }
 
             al_draw_textf(font, al_map_rgb(255, 255, 255), 10, 10, 0, "Points: %d", points);
+            al_draw_textf(font, al_map_rgb(255, 255, 255), 10, 30, 0, "Ammo: %d/%d", player.getAmmoInMag(), player.getAmmunition());
 
             al_flip_display();
         }
     }
 
-    al_destroy_sample(backgroundMusic);
-    al_destroy_bitmap(background);
-    al_destroy_font(font);
-    al_destroy_display(display);
-    al_destroy_timer(timer);
-    al_destroy_event_queue(eventQueue);
+    clearAfterGameEnd(backgroundMusic, background, font, display, timer, eventQueue);
 
     return 0;
 }

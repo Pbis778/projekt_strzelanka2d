@@ -18,11 +18,14 @@ public:
     float getY() const { return y; }
     float getWidth() const { return width; }
     float getHeight() const { return height; }
+    void takeDamage(int damage);
+    bool isDead() const;
 private:
     float x, y;
     float scale;
     ALLEGRO_BITMAP* sprite;
     float width, height;
+    float health;
 };
 
 #endif
