@@ -55,6 +55,15 @@
     <Image Include="assets\bullet.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="assets\fullHealthbar.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="assets\OneOfThreeHealthBar.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="assets\TwoOfThreeHealthBar.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\background.wav">

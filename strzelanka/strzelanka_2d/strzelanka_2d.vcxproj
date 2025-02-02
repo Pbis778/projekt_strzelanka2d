@@ -157,7 +157,10 @@
   <ItemGroup>
     <Image Include="assets\background.png" />
     <Image Include="assets\bullet.png" />
+    <Image Include="assets\fullHealthbar.png" />
+    <Image Include="assets\OneOfThreeHealthBar.png" />
     <Image Include="assets\player.png" />
+    <Image Include="assets\TwoOfThreeHealthBar.png" />
     <Image Include="assets\zombie.png" />
   </ItemGroup>
   <ItemGroup>

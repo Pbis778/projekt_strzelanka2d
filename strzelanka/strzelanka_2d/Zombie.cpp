@@ -11,11 +11,24 @@ Zombie::Zombie(const char* filePath, float x, float y, float scale)
     }
     width = al_get_bitmap_width(sprite) * scale;
     height = al_get_bitmap_height(sprite) * scale;
+
+    healthBarFull = al_load_bitmap("assets/fullHealthbar.png");
+    healthBarOneThird = al_load_bitmap("assets/OneOfThreeHealthBar.png");
+    healthBarTwoThirds = al_load_bitmap("assets/TwoOfThreeHealthBar.png");
 }
 
 Zombie::~Zombie() {
     if (sprite) {
         al_destroy_bitmap(sprite);
+    }
+    if (healthBarOneThird) {
+        al_destroy_bitmap(healthBarOneThird);
+    }
+    if (healthBarFull) {
+        al_destroy_bitmap(healthBarFull);
+    }
+    if (healthBarTwoThirds) {
+        al_destroy_bitmap(healthBarTwoThirds);
     }
 }
 
@@ -29,6 +42,28 @@ void Zombie::draw() const {
         al_draw_scaled_bitmap(sprite, 0, 0,
             al_get_bitmap_width(sprite), al_get_bitmap_height(sprite),
             x, y, width, height, 0);
+    }
+
+    ALLEGRO_BITMAP* currentZombieHealth = nullptr;
+    if (health == 3) {
+        currentZombieHealth = healthBarFull;
+    }
+    else if (health == 2) {
+        currentZombieHealth = healthBarTwoThirds;
+    }
+    else if (health == 1) {
+        currentZombieHealth = healthBarOneThird;
+    }
+
+    if (currentZombieHealth) {
+        float healthBarWidth = width * 0.8f;
+        float healthBarHeight = 44.0f;
+        float healthBarX = x + (width - healthBarWidth) / 2;
+        float healthBarY = y - 24;
+
+        al_draw_scaled_bitmap(currentZombieHealth, 0, 0,
+            al_get_bitmap_width(currentZombieHealth), al_get_bitmap_height(currentZombieHealth),
+            healthBarX, healthBarY, healthBarWidth, healthBarHeight, 0);
     }
 }
 

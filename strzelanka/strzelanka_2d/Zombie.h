@@ -26,6 +26,10 @@ private:
     ALLEGRO_BITMAP* sprite;
     float width, height;
     float health;
+
+    ALLEGRO_BITMAP* healthBarFull;
+    ALLEGRO_BITMAP* healthBarTwoThirds;
+    ALLEGRO_BITMAP* healthBarOneThird;
 };
 
 #endif
