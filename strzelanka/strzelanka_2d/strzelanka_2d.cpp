@@ -237,6 +237,7 @@ int main() {
 
             if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
                 isPaused = !isPaused;
+                redraw = true;
             }
             
         }

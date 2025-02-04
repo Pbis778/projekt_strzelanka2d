@@ -145,7 +145,7 @@
     <ClCompile Include="Attack.cpp" />
     <ClCompile Include="Zombie.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="strzelanka_2d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ammo.h" />
